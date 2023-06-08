@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Add</title>
+    <style>
+        #map {
+            height: 300px;
+            width: 600px;
+        }
+
+        .phaseform {
+            position: absolute;
+            z-index: 100;
+            width: 50%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .divblur {
+            filter: blur(5px);
+            /* Adjust the blur amount as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="../img/icons8-construction-64.png">
+            <span class="logo_name">Build Manage</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="home.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="active">
+                    <i class='bx bx-box'></i>
+                    <span class="links_name">Add Project</span>
+                </a>
+            </li>
+            <li>
+                <a href="projectsView.html">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Project Views</span>
+                </a>
+            </li>
+            <li>
+                <a href="orderlist.html">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Order list</span>
+                </a>
+            </li>
+            <li>
+                <a href="stocks.html">
+                    <i class='bx bx-coin-stack'></i>
+                    <span class="links_name">Stock</span>
+                </a>
+            </li>
+            <li>
+                <a href="totalorder.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Total order</span>
+                </a>
+            </li>
+            <li>
+                <a href="Teams.html">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Team</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="../signin.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Add Product</span>
+            </div>
+            <div class="profile-details col-3" >
+                <i class="m-auto"><img id="user-picture" src="" alt="User Picture"></i>
+                <h5 class = "m-auto"  id="username" value = "Username"></h5>
+            </div>
+        </nav>
+        <br>
+        <div style="width: 100%; margin-top: 83px; position: absolute; overflow-x: hidden;">
+            <section class="content">
+                <div class="phaseform">
+                    <div class="row hidden" id="phaseform1">
+                        <div class="col-md-10 ml-4">
+                            <div class="card card-primary m-3">
+                                <div class="card-header text-white"
+                                    style=" background: -webkit-linear-gradient(right, #5f7504, #134756);">
+                                    <h4 class="card-title" id="phaseid">Phase Insert</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="phaseins">
+                                        <div class="form-group">
+                                            <label for="phasename">Phase Id:</label>
+                                            <input type="number" class="form-control" id="phasei" name="phasei"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phasename">Enter Phase name:</label>
+                                            <input type="text" class="form-control" id="phasename" name="phasename"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phaseDescription">Project Description</label>
+                                            <textarea id="phaseDescription" class="form-control" rows="4"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="budget">Enter Budget:</label>
+                                            <input type="number" class="form-control" id="budget" name="budget"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Phase Duration</label>
+                                            <div class="row g-3">
+                                                <div class="col">
+                                                    <input type="date" id="phasestart" class="form-control"
+                                                        placeholder="Start date">
+                                                </div>
+                                                <p class="m-auto">to</p>
+                                                <div class="col">
+                                                    <input type="date" id="phaseend" class="form-control"
+                                                        placeholder="End date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="submit" value="Insert" class="btn btn-success float-right"
+                                            onclick="assigndata()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="proj">
+                    <div class="col-md-6 ml-4">
+                        <div class="card card-primary">
+                            <div class="card-header text-white"
+                                style=" background: -webkit-linear-gradient(right, #5f7504, #134756);">
+                                <h4 class="card-title">General</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="projectname">Project Name</label>
+                                    <input type="text" id="projectname" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectDescription">Project Description</label>
+                                    <textarea id="projectDescription" class="form-control" rows="4"></textarea>
+                                </div>
+                                <div class="form-group d-flex justify-content-between">
+                                    <label for="image">Enter Project image: </label>
+                                    <input id="image1" name = "image" type="file" class="btn btn-success bg-success">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Project Duration</label>
+                                    <div class="row g-3">
+                                        <div class="col">
+                                            <input type="date" id="projectstart" class="form-control"
+                                                placeholder="Project start date">
+                                        </div>
+                                        <p class="m-auto">to</p>
+                                        <div class="col">
+                                            <input type="date" id="projectend" class="form-control"
+                                                placeholder="Project end date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectmanager">Project Manager</label>
+                                    <input type="text" id="projectmanager" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Status</label>
+                                    <select id="inputStatus" class="form-control custom-select">
+                                        <option selected disabled>Select one</option>
+                                        <option>On Hold</option>
+                                        <option>Canceled</option>
+                                        <option>Success</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEstimatedDuration">Location of Project</label>
+                                    <div>
+                                        <input type="hidden" id="lattitude" />
+                                        <input type="hidden" id="longitude" />
+                                        <input id="pac-input" style="margin-bottom: 5px" class="form-control"
+                                            placeholder="Search your location on Map (Pointer is also movable)">
+                                        <label style="color:red;font-size:12px; display: none;"
+                                            id="pacinputwarning">This is a Required Field.</label>
+                                        <BR>
+                                        <div class="row">
+                                            <div id="map" style="margin-bottom: 10px"></div>
+                                        </div>
+                                        <div class="row">
+                                            <input type="hidden" id="lattitude" />
+                                            <input type="hidden" id="longitude" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="card card-secondary">
+                            <div class="card-header text-white"
+                                style=" background: -webkit-linear-gradient(right, #5f7504, #134756);">
+                                <h4 class="card-title">Budget</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputEstimatedBudget">Estimated budget</label>
+                                    <input type="number" id="inputEstimatedBudget" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEstimatedBudget">No of Plots</label>
+                                    <input type="number" id="noofplot" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectphases">Total phases</label>
+                                    <br>
+                                    <div class="row g-3" id="phases">
+                                    </div>
+                                    <input type="submit" id="projectphases" class="btn btn-success m-1"
+                                        value="Add Phase" onclick="addphase()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectmaterial">Required Material</label>
+                                    <br>
+                                    <div class="row g-3" id="materials">
+                                    </div>
+                                    <input type="text" id="materialname" class="form-control">
+                                    <br>
+                                    <input type="submit" id="projectmaterial" class="btn btn-success m-1"
+                                        value="Add Material" onclick="addmaterial()">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-11 m-5">
+                        <a href="#" class="btn btn-secondary">Cancel</a>
+                        <input type="submit" value="Create new Project" class="btn btn-success float-right"
+                            onclick="insertproject()">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </section>
+</body>
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    var totalphases = 0;
+    var phasename = [];
+    var phasedes = [];
+    var phasebudget = [];
+    var phasedate = [];
+    function assigndata() {
+        document.getElementById("phaseform1").classList.add("hidden");
+        document.getElementById("proj").classList.remove("divblur");
+        document.getElementById("ph" + document.getElementById("phasei").value).value = document.getElementById("phasename").value;
+        phasename.push(document.getElementById("phasename").value);
+        phasedes.push(document.getElementById("phaseDescription").value);
+        phasebudget.push(document.getElementById("budget").value);
+        phasedate.push(document.getElementById("phasestart").value + "-" + document.getElementById("phaseend").value);
+    }
+    var materialarr = [];
+    function insertproject() {
+        var pname = $("#projectname").val();
+        var pd = $("#projectDescription").val();
+        var pdate = $("#projectstart").val() + "-" + $("#projectend").val();
+        var pm = $("#projectmanager").val();
+        var ps = $("#inputStatus option:selected").val();
+        var loc = $("#pac-input").val();
+        var budget = $("#inputEstimatedBudget").val();
+        var mater = document.getElementById("materials").children;
+        var noofplot = $("#noofplot").val();
+        for (let i = 0; i < mater.length; i++) {
+            materialarr.push(mater[i].innerHTML);
+        }
+        var image = $('#image1').prop("files")[0];
+        var formData = new FormData();
+        formData.append('pname', pname);
+        formData.append('pd', pd);
+        formData.append('pdate', pdate);
+        formData.append('pm', pm);
+        formData.append('ps', ps);
+        formData.append('loc', loc);
+        formData.append('budget', budget);
+        formData.append('mater', materialarr);
+        formData.append('phasename', phasename);
+        formData.append('phasedes', phasedes);
+        formData.append('phasebudget', phasebudget);
+        formData.append('phasedate', phasedate);
+        formData.append('image', image);
+        formData.append('noofplot',noofplot);
+        formData.append('totalphases', totalphases);
+       alert(phasename);
+        $.ajax({
+            url: 'http://localhost:4000/insertproject',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                alert("Data Inserted");
+                location.reload();
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    }
+
+    var mt = 0;
+    function addmaterial() {
+        var m = document.createElement("div");
+        m.id = mt;
+        m.innerHTML = document.getElementById("materialname").value;
+        m.classList.add('bg-warning');
+        m.classList.add('m-3');
+        m.classList.add('p-1');
+        m.classList.add('rounded');
+        document.getElementById("materials").appendChild(m);
+        mt++;
+    }
+
+    var ph = 0;
+    function addphase() {
+        var pha = document.createElement("div");
+        pha.id = ph;
+        pha.classList.add('col');
+        pha.classList.add('m-1');
+        var inp = document.createElement("input");
+        inp.type = "submit";
+        inp.classList.add('btn');
+        inp.classList.add('btn-warning');
+        inp.value = "Phase " + ph;
+        inp.id = "ph" + ph;
+        inp.addEventListener("click", function () { inputphase(pha.id) });
+        pha.appendChild(inp);
+        document.getElementById("phases").appendChild(pha);
+        ph++;
+        totalphases++;
+    }
+
+    function inputphase(phaid) {
+        document.getElementById("phaseid").innerHTML = "Phase " + phaid + " Insert";
+        document.getElementById("phaseform1").classList.remove("hidden");
+        document.getElementById("proj").classList.add("divblur");
+        document.getElementById("phasei").value = phaid;
+    }
+
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+
+
+    //getting user data using session id
+    var id = sessionStorage.getItem("id");
+    var data = { id: id };
+    let post = JSON.stringify(data);
+    $.ajax({
+        url: 'http://localhost:4000/getdata',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (result) {
+            result.forEach(element => {
+                var name = element.firstname + " " + element.lastname;
+                document.getElementById("username").innerHTML = name;
+                $("#user-picture").attr("src", "../uploads/" + element.image); 
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+
+
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('number');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+
+    var map;
+
+    function initAutocomplete() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: 30.3753,
+                lng: 69.3451
+            },
+            zoom: 5
+        });
+
+
+        var options = {
+            componentRestrictions: { country: "pk" }
+        };
+
+        var input = (document.getElementById('pac-input'));
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker = new google.maps.Marker({
+            draggable: true,
+            map: map
+
+        });
+
+
+        autocomplete.addListener('place_changed', function () {
+
+            var place = autocomplete.getPlace();
+            var lattitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+                document.getElementById("lattitude").value = this.getPosition().lat();
+                document.getElementById("longitude").value = this.getPosition().lng();
+
+                //Marker Location Changed
+
+                document.getElementById("lattitude").value = this.getPosition().lat();
+
+
+                document.getElementById("longitude").value = this.getPosition().lng();
+
+
+            });
+
+            //alert(lattitude + ' ' + longitude);
+            document.getElementById("lattitude").value = lattitude;
+            document.getElementById("longitude").value = longitude;
+
+
+            //Selected Place Changed
+
+            //alert("Hello");
+
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+                // Why 17? Because it looks good.
+            }
+
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            var address = '';
+            if (place.address_components) {
+                address = [(place.address_components[0] && place.address_components[0].short_name || ''), (place.address_components[1] && place.address_components[1].short_name || ''), (place.address_components[2] && place.address_components[2].short_name || '')].join(' ');
+            }
+
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+            infowindow.open(map, marker);
+
+            document.getElementById('pac-input').value = place.formatted_address;
+
+            // iterate through address_component array
+        });
+
+
+
+    }
+
+
+
+    function muSubFun() {
+        var latitude = document.getElementById("lattitude").value;
+        var longitude = document.getElementById("longitude").value;
+        var input = document.getElementById("pac-input").value;
+
+
+        alert(latitude, longitude);
+
+        /*	
+            $.post("controller.php", {
+                
+                
+                lat : 1,
+                lon : 2,
+                inp : 'kjsdkf afkjdkdajf jkdfakdfkad hkdafhk',
+                rol : 3,			
+                
+                action : 'adddata'
+                
+            }, function(result) {
+            
+                
+                alert("Datab Added");
+                
+            });		
+            
+            */
+
+
+    }
+
+</script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9irjntPHdEJf024h7H_XKpS11OeW1Nh8&libraries=places&callback=initAutocomplete"
+    async defer></script>
+
+</html>

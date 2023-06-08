@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <title>Home</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .divblur {
+            filter: blur(5px);
+            /* Adjust the blur amount as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="../img/icons8-construction-64.png">
+            <span class="logo_name">Build Manage</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="userhome.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="userprojectsView.html" class="active">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Project Views</span>
+                </a>
+            </li>
+            <li>
+                <a href="order.html">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Order</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="../signin.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Projects</span>
+            </div>
+            <div class="profile-details col-3">
+                <i class="m-auto"><img id="user-picture" src="" alt="User Picture"></i>
+                <h5 class="m-auto" id="username" value="Username"></h5>
+            </div>
+        </nav>
+        <div style="width: 100%; margin-top: 83px; position: absolute;">
+            <div class="content-wrapper">
+                <!-- Main content -->
+                <section class="content">
+                    <div class="card-body p-0" id="tablediv">
+                        <table class="table table-striped projects ">
+                            <thead>
+                                <tr>
+                                    <th style="width: 3%">
+                                        #
+                                    </th>
+                                    <th style="width: 20%">
+                                        Project Name
+                                    </th>
+                                    <th style="width: 20%">
+                                        Available Plots
+                                    </th>
+                                    <th>
+                                        Project Progress
+                                    </th>
+                                    <th style="width:7%" class="text-center">
+                                        Status
+                                    </th>
+                                    <th style="width: 15%">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="ptable">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card card-solid hidden" id="proview">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="col-12">
+                                        <div class="product-image"><img src="../uploads/1686040225120-cityhousing.jpg"
+                                                alt="Product Image" style="height: 100%; width: 100%;" id="proimage">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="pid" class="hidden"></div>
+                                <div class="col-12 col-sm-6">
+                                    <h3 class="my-3" id="pname"></h3>
+                                    <p id="pdescription"></p>
+                                    <hr>
+                                    <h4>Available Plots</h4>
+                                    <p id="availableplots">10</p>
+
+                                    <h4>Price: </h4>
+                                    <p>10,000,000</p>
+
+                                    <div class="mt-4">
+                                        <div class="btn btn-primary btn-sm btn-flat" onclick="bookplot()">
+                                            <i class="fas fa-shopping-cart"></i>Book
+                                        </div>
+                                        <div class="btn btn-secondary btn-sm btn-flat" onclick="viewcancel()">
+                                            <i class="fas fa-shopping-cart"></i>Cancel
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+
+    function viewcancel() {
+        document.getElementById("tablediv").classList.remove("hidden");
+        document.getElementById("proview").classList.add("hidden");
+    }
+
+    projectshow();
+    function projectshow() {
+        var table = document.getElementById("ptable");
+        var pid;
+        $.ajax({
+            url: 'http://localhost:4000/getprojectuser',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (result) {
+                result.forEach(element => {
+                    pid = element.id;
+                    var totalprogress = (element.completephase / element.totalphases) * 100;
+                    var row = document.createElement("tr");
+                    pid = element.id;
+                    row = assignid(row, pid);
+                    var col1 = document.createElement("td");
+                    col1.innerText = "#";
+                    row.appendChild(col1);
+                    var col2 = document.createElement("td");
+                    col2.innerText = element.pname;
+                    row.appendChild(col2);
+                    var col3 = document.createElement("td");
+                    col3.innerHTML = element.plots - element.bookedplots;
+                    row.appendChild(col3);
+                    var col4 = document.createElement("td");
+                    col4.classList.add("project_progress");
+                    var col4div = document.createElement("div");
+                    col4div.classList.add("progress");
+                    col4div.classList.add("progress-sm");
+                    var col4div2 = document.createElement("div");
+                    col4div2.classList.add("progress-bar");
+                    col4div2.classList.add("bg-green");
+                    col4div2.role = "progressbar";
+                    col4div2.ariaValueNow = totalprogress;
+                    col4div2.ariaValueMax = 100;
+                    col4div2.ariaValueMin = 0;
+                    col4div2.style.width = totalprogress + "%";
+                    col4div.appendChild(col4div2);
+                    var col4div3 = document.createElement("small");
+                    col4div3.innerHTML = (totalprogress.toPrecision(3)) + "%";
+                    col4.appendChild(col4div);
+                    col4.appendChild(col4div3);
+                    row.appendChild(col4);
+                    var col5 = document.createElement("td");
+                    col5.classList.add("project-state");
+                    var sp = document.createElement("span");
+                    sp.classList.add("badge");
+                    sp.classList.add("badge-success");
+                    sp.innerHTML = element.status;
+                    col5.appendChild(sp);
+                    row.appendChild(col5);
+                    var col6 = document.createElement("td");
+                    col6.classList.add("project-actions");
+                    col6.classList.add("text-right");
+                    var btn1 = document.createElement("button");
+                    btn1.classList.add("btn");
+                    btn1.classList.add("btn-primary");
+                    btn1.classList.add("btn-sm");
+                    btn1.classList.add("m-1");
+                    btn1.addEventListener("click", function () { viewproject(event) });
+                    btn1.innerHTML = "View";
+                    var btn2 = document.createElement("button");
+                    btn2.classList.add("btn");
+                    btn2.classList.add("btn-success");
+                    btn2.classList.add("btn-sm");
+                    btn2.classList.add("m-1");
+                    btn2.addEventListener("click", function () { viewproject(event) });
+                    btn2.innerHTML = "Book";
+                    col6.id = element.id;
+                    col6.appendChild(btn1);
+                    col6.appendChild(btn2);
+                    row.appendChild(col6);
+                    table.appendChild(row);
+                });
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    }
+
+    function viewproject(event) {
+        document.getElementById("tablediv").classList.add("hidden");
+        document.getElementById("proview").classList.remove("hidden");
+        var id = event.target.parentElement.id;
+        var data = { id: id };
+        let post = JSON.stringify(data);
+        $.ajax({
+            url: 'http://localhost:4000/getindividualproject',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'POST',
+            contentType: 'application/json',
+            data: post,
+            success: function (result) {
+                result.forEach(element => {
+                    $("#proimage").attr("src", "../uploads/" + element.image);
+                    document.getElementById("pname").innerHTML = element.pname;
+                    document.getElementById("pdescription").innerHTML = element.pdescription;
+                    document.getElementById("availableplots").innerHTML = element.plots - element.bookedplots;
+                    document.getElementById("pid").innerHTML = element.id;
+                });
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    }
+
+    //getting user data using session id
+    var id = sessionStorage.getItem("id");
+    var data = { id: id };
+    let post = JSON.stringify(data);
+    $.ajax({
+        url: 'http://localhost:4000/getdata',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (result) {
+            result.forEach(element => {
+                var name = element.firstname + " " + element.lastname;
+                document.getElementById("username").innerHTML = name;
+                $("#user-picture").attr("src", "../uploads/" + element.image);
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    function assignid(row, id) {
+        row.id = id;
+        return row;
+    }
+
+    function bookplot() {
+        var id = document.getElementById("pid").innerHTML;
+        var userid = sessionStorage.getItem("id");
+        var data = { userid:userid ,id: id };
+        let post = JSON.stringify(data);
+        $.ajax({
+            url: 'http://localhost:4000/bookplot',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'POST',
+            contentType: 'application/json',
+            data: post,
+            success: function (result) {
+                alert("Plot Booked Thank You");
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    }
+
+</script>
+
+</html>
