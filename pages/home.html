@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: #979dbd;
+            overflow: hidden;
+            font-family: system-ui;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        .logo {
+            margin: 0px;
+            margin-left: 28px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .logo span {
+            color: #298417;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #abbb1a;
+            overflow: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+        }
+
+        .sidenav a {
+            padding: 15px 8px 15px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #819a13;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+            background-color: #8cbc06;
+        }
+
+        .sidenav {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+            margin-left: 300px;
+        }
+
+        .head {
+            padding: 20px;
+        }
+
+        .col-div-6 {
+            width: 50%;
+            float: left;
+        }
+
+        .profile {
+            display: inline-block;
+            width: 160px;
+        }
+
+        .pro-img {
+            float: left;
+            width: 40px;
+            margin-top: 5px;
+        }
+
+        .profile p {
+            color: white;
+            font-weight: 500;
+            margin-left: 55px;
+            margin-top: 10px;
+            font-size: 13.5px;
+        }
+
+        .profile p span {
+            font-weight: 400;
+            font-size: 12px;
+            display: block;
+            color: #f8f3f3;
+        }
+
+        .col-div-3 {
+            width: 25%;
+            float: left;
+        }
+
+        .box {
+            width: 85%;
+            height: 100px;
+            background: linear-gradient(to left, #304c56 0%, #5d7d0d 80%);
+            margin-left: 10px;
+            padding: 10px;
+        }
+
+        .box p {
+            font-size: 35px;
+            color: white;
+            font-weight: bold;
+            line-height: 30px;
+            padding-left: 10px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .box p span {
+            font-size: 20px;
+            font-weight: 400;
+            color: #fbf9f9;
+        }
+
+        .box-icon {
+            font-size: 40px !important;
+            float: right;
+            margin-top: 35px !important;
+            color: #818181;
+            padding-right: 10px;
+        }
+
+        .col-div-8 {
+            width: 70%;
+            float: left;
+        }
+
+        .col-div-4 {
+            width: 30%;
+            float: left;
+        }
+
+        .content-box {
+            padding: 20px;
+        }
+
+        .content-box p {
+            margin: 0px;
+            font-size: 20px;
+            color: #fafafa;
+        }
+
+        .content-box p span {
+            float: right;
+            background-color: #086e67;
+            padding: 3px 15px;
+            font-size: 15px;
+            margin: auto;
+        }
+
+        .box-8,
+        .box-4 {
+            width: 95%;
+            background: linear-gradient(to left, #304c56 0%, #5d7d0d 80%);
+            height: 350px;
+            margin: auto;
+
+        }
+
+        .nav2 {
+            display: none;
+        }
+
+        .box-8 {
+            margin-left: 10px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+
+        }
+
+        td,
+        th {
+            text-align: left;
+            padding: 15px;
+            color: #fbfffe;
+            border-bottom: 1px solid #81818140;
+        }
+
+        .circle-wrap {
+            margin: 50px auto;
+            width: 150px;
+            height: 150px;
+            background: #a80d0d;
+            border-radius: 50%;
+        }
+
+        .circle-wrap .circle .mask,
+        .circle-wrap .circle .fill {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .circle-wrap .circle .mask {
+            clip: rect(0px, 150px, 150px, 75px);
+        }
+
+        .circle-wrap .circle .mask .fill {
+            clip: rect(0px, 75px, 150px, 0px);
+            background-color: #a4d111;
+        }
+
+        .circle-wrap .circle .mask.full,
+        .circle-wrap .circle .fill {
+            animation: fill ease-in-out 3s;
+            transform: rotate(126deg);
+        }
+
+        @keyframes fill {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(126deg);
+            }
+        }
+
+        .circle-wrap .inside-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: #fff;
+            line-height: 130px;
+            text-align: center;
+            margin-top: 10px;
+            margin-left: 10px;
+            position: absolute;
+            z-index: 100;
+            font-weight: 700;
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body style="background: linear-gradient(to left, #666633 0%, #ffffff 100%)">
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="../img/icons8-construction-64.png">
+            <span class="logo_name">Build Manage</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="home.html" class="active">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="addproject.html">
+                    <i class='bx bx-box'></i>
+                    <span class="links_name">Add Project</span>
+                </a>
+            </li>
+            <li>
+                <a href="projectsView.html">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Project Views</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Order list</span>
+                </a>
+            </li>
+            <li>
+                <a href="stocks.html">
+                    <i class='bx bx-coin-stack'></i>
+                    <span class="links_name">Stock</span>
+                </a>
+            </li>
+            <li>
+                <a href="totalorder.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Total order</span>
+                </a>
+            </li>
+            <li>
+                <a href="Teams.html">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Team</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="../signin.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section" style="background-color: #ffffff" ;="">
+        <nav>
+            <div class="sidebar-button">
+                <i class="bx bx-menu sidebarBtn"></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+            <div class="profile-details col-3">
+                <i class="m-auto"><img id="user-picture"
+                        src="file:///C:/Users/Z/OneDrive/Desktop/Web%20Project/Webproject/pages/home.html"
+                        alt="User Picture"></i>
+                <h5 class="m-auto" id="username" value="Username"></h5>
+            </div>
+        </nav>
+        <div style="width: 100%; margin-top: 83px; position: absolute;">
+            <div class="container">
+                <h1 class="mt-4">Materio - Overview</h1>
+                <div class="col-div-3">
+                    <div class="box">
+                        <p id = "users"><br><span>Users</span></p>
+                        <i class="fa fa-users box-icon"></i>
+                    </div>
+                </div>
+                <div class="col-div-3">
+                    <div class="box">
+                        <p id = "projects">5<br><span>Projects</span></p>
+                        <i class="fa fa-list box-icon"></i>
+                    </div>
+                </div>
+                <div class="col-div-3">
+                    <div class="box">
+                        <p id = "orders"><br><span>Orders</span></p>
+                        <i class="fa fa-shopping-bag box-icon"></i>
+                    </div>
+                </div>
+                <div class="col-div-3">
+                    <div class="box">
+                        <p id = "plots"><br><span>Total Plots</span></p>
+                        <i class="fa fa-tasks box-icon"></i>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br><br>
+                <div class="col-div-8">
+                    <div class="box-8">
+                        <div class="content-box">
+                            <p><b>Top Selling Projects <span>Sell All </span></b></p>
+                            <br>
+                            <table>
+                                <tbody id = "projectdetail">
+                                    <tr>
+                                        <th>Projects</th>
+                                        <th>Project Manager</th>
+                                        <th>Total Plots</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-div-4">
+                    <div class="box-4">
+                        <div class="content-box">
+                            <p><b>Total Sale <span>Sell All</span></b></p>
+
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 70% </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+
+
+            <script src="./home_files/jquery.min.js.download"></script>
+            <script>
+
+                $(".nav").click(function () {
+                    $("#mySidenav").css('width', '70px');
+                    $("#main").css('margin-left', '70px');
+                    $(".logo").css('visibility', 'hidden');
+                    $(".logo span").css('visibility', 'visible');
+                    $(".logo span").css('margin-left', '-10px');
+                    $(".icon-a").css('visibility', 'hidden');
+                    $(".icons").css('visibility', 'visible');
+                    $(".icons").css('margin-left', '-8px');
+                    $(".nav").css('display', 'none');
+                    $(".nav2").css('display', 'block');
+                });
+
+                $(".nav2").click(function () {
+                    $("#mySidenav").css('width', '300px');
+                    $("#main").css('margin-left', '300px');
+                    $(".logo").css('visibility', 'visible');
+                    $(".icon-a").css('visibility', 'visible');
+                    $(".icons").css('visibility', 'visible');
+                    $(".nav").css('display', 'block');
+                    $(".nav2").css('display', 'none');
+                });
+
+            </script>
+
+
+        </div>
+
+    </section>
+</body>
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+
+
+    //getting user data using session id
+    var id = sessionStorage.getItem("id");
+    var data = { id: id };
+    let post = JSON.stringify(data);
+    $.ajax({
+        url: 'http://localhost:4000/getdata',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (result) {
+            result.forEach(element => {
+                var name = element.firstname + " " + element.lastname;
+                document.getElementById("username").innerHTML = name;
+                $("#user-picture").attr("src", "../uploads/" + element.image);
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+
+
+   showprojects();
+    function showprojects(){
+        $.ajax({
+        url: 'http://localhost:4000/dashboarddata1',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (result) {
+            result.forEach(element => {
+                var row = '<tr>'+'<td>' + element.pname + '</td> <td> '+ element.pmanager+ '</td> <td>' + element.plots + '</td></tr>';
+                document.getElementById("projectdetail").innerHTML += row;
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+
+    $.ajax({
+        url: 'http://localhost:4000/dashboarddata2',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (result) {
+            result.forEach(element => {
+                document.getElementById("projects").innerHTML = element.projects + '<br><span>Projects</span>';
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    $.ajax({
+        url: 'http://localhost:4000/dashboarddata3',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (result) {
+            result.forEach(element => {
+                document.getElementById("users").innerHTML = element.users + '<br><span>Users</span>';         
+              });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    $.ajax({
+        url: 'http://localhost:4000/dashboarddata4',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (result) {
+            result.forEach(element => {
+                document.getElementById("plots").innerHTML = element.plots + '<br><span>Plots</span>';;          
+              });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    
+
+    $.ajax({
+        url: 'http://localhost:4000/dashboarddata5',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (result) {
+            result.forEach(element => {
+                document.getElementById("orders").innerHTML = element.orders + '<br><span>Orders</span>';;          
+              });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    }
+</script>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="../img/icons8-construction-64.png">
+            <span class="logo_name">Build Manage</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="userhome.html" >
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="userprojectsView.html">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Project Views</span>
+                </a>
+            </li>
+            <li>
+                <a href="order.html" class="active">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Order</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="../signin.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Order</span>
+            </div>
+            <div class="profile-details col-3">
+                <i class="m-auto"><img id="user-picture" src="" alt="User Picture"></i>
+                <h5 class="m-auto" id="username" value="Username"></h5>
+            </div>
+        </nav>
+        <div style="width: 100%; margin-top: 83px; position: absolute;" id = "orderlist">
+        </div>
+    </section>
+
+</body>
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+    viewproject();
+    function viewproject()
+    {
+        $.ajax({
+            url: 'http://localhost:4000/getallprojectorder',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (result) {
+                result.forEach(element => {
+                    
+                    var card = document.createElement("div");
+                    card.classList.add("card");
+                    card.classList.add("card-solid");
+                    card.classList.add("m-3");
+                    var cardbody = document.createElement("div");
+                    cardbody.classList.add("card-body");
+                    var row = document.createElement("div");
+                    row.classList.add("row");
+                    var imagediv = document.createElement("div");
+                    imagediv.classList.add("col-12");
+                    imagediv.classList.add("col-sm-6");
+                    var image = document.createElement("img");
+                    image.src = "../uploads/" + element.image;
+                    image.style.height = 100 +"%";
+                    image.style.width = 100 +"%";
+                    imagediv.appendChild(image);
+
+                    var cdiv = document.createElement("div");
+                    cdiv.classList.add("col-12");
+                    cdiv.classList.add("col-sm-6");
+
+                    var name = document.createElement("h3");
+                    name.classList.add("my-3");
+                    name.innerHTML = element.pname;
+                    var para = document.createElement("p");
+                    para.innerHTML = element.pdescription;
+                    
+                    var hrtag = document.createElement("hr");
+                    var aplots = document.createElement("h4");
+                    aplots.innerHTML = "Available Plots";
+                    var plots = document.createElement("p");
+                    plots.innerHTML =  element.plots - element.bookedplots;
+
+                    var price = document.createElement("h4");
+                    price.innerHTML = "Price: ";
+                    var pr = document.createElement("p");
+                    pr.innerHTML =  "10,000,000";
+                    
+                    var bdiv = document.createElement("div"); 
+                    bdiv.classList.add("mt-4");
+                    bdiv.id = element.id;
+                    var buttondiv = document.createElement("div");
+                    buttondiv.classList.add("btn");
+                    buttondiv.classList.add("btn-primary");
+                    buttondiv.classList.add("btn-sm");
+                    buttondiv.classList.add("btn-flat");
+                    buttondiv.innerHTML = "Book";
+                    
+                    bdiv.appendChild(buttondiv);
+
+                    cdiv.appendChild(name);
+                    cdiv.appendChild(para);
+                    cdiv.appendChild(hrtag);
+                    cdiv.appendChild(aplots);
+                    cdiv.appendChild(plots);
+                    cdiv.appendChild(price);
+                    cdiv.appendChild(pr);
+                    cdiv.appendChild(bdiv);
+
+                    row.appendChild(imagediv);
+                    row.appendChild(cdiv);
+                    cardbody.appendChild(row);
+                    card.appendChild(cardbody);
+                    document.getElementById("orderlist").appendChild(card);
+            });
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    }
+    //getting user data using session id
+    var id = sessionStorage.getItem("id");
+    var data = { id: id };
+    let post = JSON.stringify(data);
+    $.ajax({
+        url: 'http://localhost:4000/getdata',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (result) {
+            result.forEach(element => {
+                var name = element.firstname + " " + element.lastname;
+                document.getElementById("username").innerHTML = name;
+                $("#user-picture").attr("src", "../uploads/" + element.image);
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+
+
+</script>
+
+</html>

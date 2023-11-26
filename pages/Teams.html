@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Add</title>
+    <style>
+        #map {
+            height: 300px;
+            width: 600px;
+        }
+
+        .phaseform {
+            position: absolute;
+            z-index: 100;
+            width: 50%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .divblur {
+            filter: blur(5px);
+            /* Adjust the blur amount as needed */
+        }
+        .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+.userDetails{
+    border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  margin: 8px;
+}
+.img1 {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  max-width: 500px;
+  height: auto;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  
+}
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="../img/icons8-construction-64.png">
+            <span class="logo_name">Build Manage</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="home.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="addproject.html" >
+                    <i class='bx bx-box'></i>
+                    <span class="links_name">Add Project</span>
+                </a>
+            </li>
+            <li>
+                <a href="projectsView.html">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Project Views</span>
+                </a>
+            </li>
+            <li>
+                <a href="orderlist.html">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Order list</span>
+                </a>
+            </li>
+            <li>
+                <a href="stocks.html">
+                    <i class='bx bx-coin-stack'></i>
+                    <span class="links_name">Stock</span>
+                </a>
+            </li>
+            <li>
+                <a href="totalorder.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Total order</span>
+                </a>
+            </li>
+            <li>
+                <a href="Teams.html"  class="active">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Team</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="../signin.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Teams</span>
+            </div>
+            <div class="profile-details col-3" >
+                <i class="m-auto"><img id="user-picture" src="" alt="User Picture"></i>
+                <h5 class = "m-auto"  id="username" value = "Username"></h5>
+            </div>
+        </nav>
+        <br>
+        <div style="width: 100%; margin-top: 83px; position: absolute; overflow-x: hidden;">
+            <section class="content">
+                <div class="row">
+                    <div class="card col-6">
+                        <img src="../uploads/Remal.jpeg" class="img1">
+                        <br>
+                        <h3>Remal Fatima</h3>
+                        <p class="title">Admin</p>
+                        <p><b>Ahal States</b></p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        
+                        <div class = "userDetails" id="userDetails1">
+                            <p><button id = "showDetailsBtn" onclick="showContacts('f201103@cfd.nu.edu.pk', 'userDetails1')">Contact</button></p>
+                        </div>     
+                      </div>
+    
+                      <div class="card col-6">
+                        <img src="../uploads/Ahmad.jpg" class="img1">
+                        <br>
+                        <h4>Muhammad Ahmad</h4>
+                        <p class="title">Admin</p>
+                        <p><b>Ahal States</b></p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <div class = "userDetails" id="userDetails2">
+                            <p><button id = "showDetailsBtn" onclick="showContacts('f200125@cfd.nu.edu.pk', 'userDetails2')">Contact</button></p>
+                        </div>  
+                      </div>
+    
+                      <div class="card col-6">
+                        <img src="../uploads/Sir Awais.png" style="height: 200px" class="img1">
+                        <br>
+                        <h3>Awaiz Azam</h3>
+                        <p class="title">Tester</p>
+                        <p><b>FAST NUCES</b></p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <div class = "userDetails" id="userDetails3">
+                            <p><button id = "showDetailsBtn" onclick="showContacts('awais.azam@nu.edu.pk', 'userDetails3')">Contact</button></p>
+                        </div>  
+                      </div>
+    
+                      <div class="card col-6">
+                        <img src="../uploads/Sir Umer.jpg" style="height: 200px" class="img1">
+                        <br>
+                        <h3>Umer Iqbal</h3>
+                        <p class="title">Tester</p>
+                        <p><b>FAST NUCES</b></p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <div class = "userDetails" id="userDetails4">
+                            <p><button id = "showDetailsBtn" onclick="showContacts('umer.iqbal@nu.edu.pk', 'userDetails4')">Contact</button></p>
+                        </div> 
+                      </div>
+    
+                    </div>
+
+
+            </section>
+        </div>
+
+    </section>
+</body>
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+  function showContacts(email, id) {
+    var Contact = document.createElement("p"); 
+    Contact.innerHTML = email;
+    document.getElementById(id).appendChild(Contact);
+};
+
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else
+            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+
+
+    //getting user data using session id
+    var id = sessionStorage.getItem("id");
+    var data = { id: id };
+    let post = JSON.stringify(data);
+    $.ajax({
+        url: 'http://localhost:4000/getdata',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (result) {
+            result.forEach(element => {
+                var name = element.firstname + " " + element.lastname;
+                document.getElementById("username").innerHTML = name;
+                $("#user-picture").attr("src", "../uploads/" + element.image); 
+            });
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+
+
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('number');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+</script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9irjntPHdEJf024h7H_XKpS11OeW1Nh8&libraries=places&callback=initAutocomplete"
+    async defer></script>
+
+</html>
